@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MATH LAB — Understand Mathematics. Explore Beyond Numbers.</title>
+<style>
+:root{--bg:#080B16;--blue:#3d7bff;--pur:#8b5cf6;--t:#e8ecf8;--m:#8d97b5;--ok:#34d399;--bad:#f87171;--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box}html{color-scheme:dark}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(650px 420px at 8% -5%,rgba(61,123,255,.28),transparent),radial-gradient(560px 420px at 100% 8%,rgba(139,92,246,.25),transparent),radial-gradient(500px 400px at 50% 110%,rgba(61,123,255,.12),transparent)}
+header.top{position:sticky;top:0;z-index:5;background:rgba(8,11,22,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1000px;margin:auto;display:flex;align-items:center;gap:16px;padding:10px 16px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;font:700 1.15rem system-ui;letter-spacing:.12em;cursor:pointer;padding:0}
+.logo{width:36px;height:36px}.logo.big{width:64px;height:64px}
+nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav button{background:none;border:1px solid transparent;color:var(--m);padding:8px 14px;border-radius:10px;font:inherit;cursor:pointer;white-space:nowrap;transition:.2s}
+nav button:hover{color:#fff}
+nav button.on{color:#fff;background:linear-gradient(135deg,rgba(61,123,255,.35),rgba(139,92,246,.35));border-color:rgba(139,92,246,.5)}
+@media(max-width:640px){.bar{flex-wrap:wrap;gap:8px}nav{width:100%}}
+main{max-width:1000px;margin:auto;padding:20px 16px 48px}
+h1,h2{margin:.2em 0 .5em}h2{font-size:1.5rem}h4{margin:1em 0 .3em;color:#a5b4fc}
+.muted{color:var(--m)}.small{font-size:.85rem}
+.card{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:16px 0}
+.stack>*{margin-bottom:14px}
+.view{display:none;animation:in .4s ease}.view.active{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hero{text-align:center;padding:36px 20px}
+.hero h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:.14em;background:linear-gradient(90deg,#7aa2ff,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:1.1rem;color:#cfe0ff;margin:0 0 10px}
+.stat{text-align:center}.stat b{display:block;font-size:2.2rem;background:linear-gradient(90deg,#7aa2ff,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}.stat span{color:var(--m);font-size:.9rem}
+.sc{cursor:pointer;text-align:left;color:var(--t);font:inherit;transition:.25s}
+.sc:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.6);box-shadow:0 10px 36px rgba(99,102,241,.3)}
+.sc i{font-style:normal;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--pur));font-weight:700;margin-bottom:8px}
+.sc strong{display:block}.sc span{color:var(--m);font-size:.9rem}
+.btn{background:linear-gradient(135deg,var(--blue),var(--pur));color:#fff;border:0;border-radius:12px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(99,102,241,.45)}
+.btn.ghost{background:rgba(255,255,255,.07);border:1px solid var(--line)}
+input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:10px;color:var(--t);padding:10px 12px;font:inherit}
+input:focus,select:focus{outline:2px solid var(--blue);outline-offset:1px}
+select option{background:#10152a}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}.row label{display:block;font-size:.85rem;color:var(--m);flex:1;min-width:110px}
+#cin{font-size:1.3rem;font-family:ui-monospace,Menlo,monospace}
+.res{font-size:2rem;font-weight:700;word-break:break-all;min-height:2.8rem;margin-top:10px;background:linear-gradient(90deg,#7aa2ff,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.err{color:var(--bad);font-size:.9rem;min-height:1.3em}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.keys button{padding:15px 0;font:inherit;font-size:1.15rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--t);cursor:pointer;transition:.15s}
+.keys button:hover{background:rgba(61,123,255,.2);transform:translateY(-2px)}
+.keys .o{color:#9db8ff}.keys .f{color:#f0abfc}.keys .z{grid-column:span 2}
+.keys .eq{background:linear-gradient(135deg,var(--blue),var(--pur));border:0;color:#fff}
+.calc{max-width:480px;margin:auto}
+details.card{padding:0}details.card>*:not(summary){margin-left:20px;margin-right:20px}details.card>*:last-child{margin-bottom:20px}
+summary{padding:16px 20px;font-weight:600;font-size:1.1rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:#a5b4fc;font-size:1.4rem;line-height:1}details[open] summary::after{content:"−"}
+summary::-webkit-details-marker{display:none}
+.fx{font-family:ui-monospace,Menlo,monospace;background:rgba(61,123,255,.12);border:1px solid rgba(61,123,255,.3);border-radius:10px;padding:10px 14px;color:#cfe0ff}
+li{margin:3px 0}
+.cw{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:rgba(8,11,22,.6);margin:14px 0 8px}
+canvas{display:block;width:100%;height:clamp(260px,60vw,440px);touch-action:pan-y;cursor:crosshair}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--t);font:inherit;font-size:.9rem}
+button.chip{cursor:pointer;transition:.2s}button.chip:hover{border-color:var(--blue)}
+.chip.on{background:linear-gradient(135deg,var(--blue),var(--pur));border-color:transparent}
+.qtop{display:flex;justify-content:space-between;color:var(--m);font-size:.9rem}
+.pb{height:6px;border-radius:6px;background:rgba(255,255,255,.08);margin:8px 0 16px;overflow:hidden}.pb div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--pur));transition:width .4s}
+.qt{font-size:1.2rem;font-weight:600;margin:0 0 8px}
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;margin:8px 0;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--t);font:inherit;cursor:pointer;transition:.2s}
+.opt:hover:not(:disabled){border-color:var(--blue);background:rgba(61,123,255,.12)}
+.opt:disabled{cursor:default;color:var(--t)}.opt.good{border-color:var(--ok);background:rgba(52,211,153,.15)}.opt.bad{border-color:var(--bad);background:rgba(248,113,113,.15)}
+.fb{border-radius:12px;padding:14px;margin:14px 0;border:1px solid var(--line)}.fb.g{background:rgba(52,211,153,.1);border-color:var(--ok)}.fb.b{background:rgba(248,113,113,.1);border-color:var(--bad)}
+.fb b{display:block;margin-bottom:6px}#qe{white-space:pre-line;color:#cdd6f0}
+.big{font-size:3rem;font-weight:700}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="logo" viewBox="0 0 40 40"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d7bff"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="10" fill="url(#lg)"/><text x="20" y="28" text-anchor="middle" font-size="22" font-weight="700" fill="#fff" font-family="sans-serif">∑</text></symbol></svg>
+
+<header class="top"><div class="bar"><button class="brand" data-go="home" aria-label="Dashboard"><svg class="logo"><use href="#logo"/></svg>MATH LAB</button><nav id="nav"></nav></div></header>
+
+<main>
+<section id="home" class="view active">
+  <div class="card hero"><svg class="logo big"><use href="#logo"/></svg><h1>MATH LAB</h1><p class="tag">Understand Mathematics. Explore Beyond Numbers.</p><p class="muted">Selamat datang! Hitung, pelajari rumus, plot grafik, dan uji kemampuanmu — semua langsung di browser.</p></div>
+  <div class="grid" id="stats"></div>
+  <h2>Fitur</h2>
+  <div class="grid" id="shortcuts"></div>
+</section>
+
+<section id="calc" class="view"><h2>Formula Calculator</h2>
+  <div class="card calc">
+    <input id="cin" inputmode="none" autocomplete="off" spellcheck="false" placeholder="mis. (12 + 3) × 4" aria-label="Ekspresi">
+    <div id="cres" class="res">0</div><div id="cerr" class="err" role="alert"></div>
+    <div class="keys" id="keys"></div>
+    <p class="muted small">Operator: + − × ÷ ^ (pangkat), % (dibagi 100), √ (akar kuadrat). Contoh persentase: 200 × 15%</p>
+  </div>
+</section>
+
+<section id="lib" class="view"><h2>Formula Library</h2><div id="flist" class="stack"></div></section>
+
+<section id="graph" class="view"><h2>Graph Plotter</h2>
+  <div class="card">
+    <div class="row">
+      <label>Jenis fungsi<select id="gt"><option value="l">Linear: y = mx + c</option><option value="q">Kuadrat: y = ax² + bx + c</option></select></label>
+      <span id="gl" class="row" style="flex:2"><label>m<input id="gm" type="number" step="any" value="2"></label><label>c<input id="gc" type="number" step="any" value="-3"></label></span>
+      <span id="gq" class="row" style="flex:3" hidden><label>a<input id="qa" type="number" step="any" value="1"></label><label>b<input id="qb" type="number" step="any" value="-2"></label><label>c<input id="qc" type="number" step="any" value="-3"></label></span>
+      <button class="btn" id="gb">Generate Graph</button>
+    </div>
+    <div id="gerr" class="err" role="alert"></div>
+    <div class="cw"><canvas id="cv"></canvas></div>
+    <div id="coord" class="muted">Arahkan kursor / sentuh grafik untuk melihat koordinat.</div>
+    <div id="ginfo" class="chips"></div>
+  </div>
+</section>
+
+<section id="quiz" class="view"><h2>Math Challenge</h2>
+  <div class="card" id="qsetup">
+    <h4>Kategori</h4><div class="chips" id="qcats"></div>
+    <h4>Difficulty</h4><div class="chips" id="qdiffs"></div>
+    <p class="muted small">10 soal per sesi. Poin per jawaban benar: Easy 10, Medium 15, Hard 20.</p>
+    <button class="btn" id="qstart">Mulai Latihan</button>
+  </div>
+  <div class="card" id="qplay" hidden>
+    <div class="qtop"><span id="qn"></span><span id="qs"></span></div><div class="pb"><div id="qbar"></div></div>
+    <p class="qt" id="qt"></p><div id="qo"></div>
+    <div id="qfb" class="fb" hidden><b id="qv"></b><div id="qe"></div></div>
+    <button class="btn" id="qnext" hidden></button>
+  </div>
+  <div class="card" id="qres" hidden style="text-align:center">
+    <h3>Hasil Latihan</h3><div class="big" id="rs"></div><p id="rd"></p><p class="muted" id="rm"></p>
+    <button class="btn" id="rr">Ulangi</button> <button class="btn ghost" id="rc">Ubah Pengaturan</button>
+  </div>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+/* ---------- Data & stats ---------- */
+const F=[
+{n:'Lingkaran',f:['Luas = π × r²','Keliling = 2 × π × r'],v:['r = jari-jari','π ≈ 3.14 atau 22/7'],q:'Lingkaran berjari-jari 7 cm. Hitung luas dan kelilingnya (π = 3.14).',s:['Luas = π × r² = 3.14 × 7² = 3.14 × 49 = 153.86 cm²','Keliling = 2 × π × r = 2 × 3.14 × 7 = 43.96 cm']},
+{n:'Persegi',f:['Luas = s²','Keliling = 4 × s'],v:['s = panjang sisi'],q:'Persegi dengan sisi 9 cm. Hitung luas dan kelilingnya.',s:['Luas = s² = 9² = 81 cm²','Keliling = 4 × s = 4 × 9 = 36 cm']},
+{n:'Luas Segitiga',f:['L = ½ × a × t'],v:['a = alas','t = tinggi'],q:'Segitiga beralas 10 cm dan tinggi 6 cm. Hitung luasnya.',s:['L = ½ × a × t','L = ½ × 10 × 6 = ½ × 60','L = 30 cm²']},
+{n:'Teorema Pythagoras',f:['a² + b² = c²','c = √(a² + b²)','a = √(c² − b²)'],v:['a, b = sisi siku-siku','c = sisi miring'],q:'Segitiga siku-siku dengan sisi siku-siku 6 cm dan 8 cm. Hitung sisi miringnya.',s:['c² = a² + b² = 6² + 8²','c² = 36 + 64 = 100','c = √100 = 10 cm']},
+{n:'Volume Kubus dan Balok',f:['Volume kubus = s³','Volume balok = p × l × t'],v:['s = rusuk kubus','p = panjang, l = lebar, t = tinggi'],q:'Kubus berrusuk 5 cm dan balok berukuran 8 × 4 × 3 cm. Hitung volume masing-masing.',s:['Kubus: V = s³ = 5³ = 125 cm³','Balok: V = p × l × t = 8 × 4 × 3 = 96 cm³']},
+{n:'Persamaan Linear',f:['ax + b = c','x = (c − b) ÷ a'],v:['x = variabel yang dicari','a, b, c = konstanta (a ≠ 0)'],q:'Selesaikan 2x + 6 = 14.',s:['2x = 14 − 6 = 8','x = 8 ÷ 2','x = 4']},
+{n:'Persentase',f:['Persentase = (bagian ÷ total) × 100%','Bagian = (p ÷ 100) × total'],v:['p = persen','total = nilai keseluruhan'],q:'Berapa 15% dari 240?',s:['Bagian = (15 ÷ 100) × 240','= 0.15 × 240','= 36']},
+{n:'Rata-rata',f:['x̄ = (x₁ + x₂ + … + xₙ) ÷ n'],v:['x̄ = rata-rata','xᵢ = setiap data','n = banyak data'],q:'Hitung rata-rata nilai 70, 80, 90, 60, 100.',s:['Jumlah = 70 + 80 + 90 + 60 + 100 = 400','n = 5','Rata-rata = 400 ÷ 5 = 80']}
+];
+let st={};try{st=JSON.parse(localStorage.getItem('mathlab_stats'))||{}}catch(e){}st.a=st.a||0;st.c=st.c||0;
+const save=()=>{try{localStorage.setItem('mathlab_stats',JSON.stringify(st))}catch(e){}};
+
+/* ---------- Navigation ---------- */
+const V=[['home','Dashboard'],['calc','Kalkulator'],['lib','Rumus'],['graph','Grafik'],['quiz','Latihan']];
+$('nav').innerHTML=V.map(([i,l])=>`<button data-go="${i}">${l}</button>`).join('');
+$('shortcuts').innerHTML=[['calc','÷','Formula Calculator','Hitung ekspresi dengan aman.'],['lib','π','Formula Library','8 rumus lengkap dengan contoh.'],['graph','f(x)','Graph Plotter','Plot fungsi linear & kuadrat.'],['quiz','✓','Math Challenge','Latihan soal acak & skor.']].map(([i,s,t,d])=>`<button class="card sc" data-go="${i}"><i>${s}</i><strong>${t}</strong><span>${d}</span></button>`).join('');
+function stats(){const acc=st.a?Math.round(st.c/st.a*100)+'%':'–';$('stats').innerHTML=[[F.length,'Rumus tersedia'],[st.a,'Soal latihan dijawab'],[acc,'Akurasi latihan']].map(([v,l])=>`<div class="card stat"><b>${v}</b><span>${l}</span></div>`).join('')}
+function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));window.scrollTo(0,0);if(id==='home')stats();if(id==='graph')draw()}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
+document.querySelector('nav button').classList.add('on');stats();
+
+/* ---------- Calculator (recursive-descent parser, no eval) ---------- */
+function calc(src){
+  const s=src.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/√/g,'sqrt').replace(/,/g,'.');
+  const T=[],re=/\s*(\d+\.?\d*|\.\d+|sqrt|[-+*\/^()%])/y;let pos=0,m;
+  while(pos<s.length){re.lastIndex=pos;m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(pos)))break;throw Error('Karakter tidak valid: "'+s.slice(pos).trim()[0]+'"')}T.push(m[1]);pos=re.lastIndex}
+  if(!T.length)throw Error('Masukkan ekspresi terlebih dahulu');
+  let i=0;const pk=()=>T[i],nx=()=>T[i++];
+  function expr(){let v=term();while(pk()==='+'||pk()==='-'){const o=nx(),r=term();v=o==='+'?v+r:v-r}return v}
+  function term(){let v=un();while(pk()==='*'||pk()==='/'){const o=nx(),r=un();if(o==='/'){if(r===0)throw Error('Pembagian dengan nol tidak diperbolehkan');v/=r}else v*=r}return v}
+  function un(){if(pk()==='-'){nx();return -un()}if(pk()==='+'){nx();return un()}return pw()}
+  function pw(){const b=pf();if(pk()==='^'){nx();const r=Math.pow(b,un());if(!isFinite(r))throw Error('Hasil pangkat tidak valid');return r}return b}
+  function pf(){let v=pr();while(pk()==='%'){nx();v/=100}return v}
+  function pr(){const t=nx();if(t===undefined)throw Error('Ekspresi belum lengkap');
+    if(t==='('){const v=expr();if(nx()!==')')throw Error('Tanda kurung tidak seimbang');return v}
+    if(t==='sqrt'){const v=pr();if(v<0)throw Error('Akar kuadrat bilangan negatif tidak terdefinisi');return Math.sqrt(v)}
+    if(/^[\d.]/.test(t))return parseFloat(t);throw Error('Ekspresi tidak valid')}
+  const r=expr();if(i<T.length)throw Error('Ekspresi tidak valid');if(!isFinite(r))throw Error('Hasil tidak valid');return r}
+const cin=$('cin');
+function evalCalc(){try{const v=calc(cin.value);$('cres').textContent=(v===0?0:v).toLocaleString('en-US',{useGrouping:false,maximumFractionDigits:10});$('cerr').textContent=''}catch(e){$('cres').textContent='—';$('cerr').textContent=e.message}}
+$('keys').innerHTML=[['C','C','f'],['⌫','DEL','f'],['(','(','o'],[')',')','o'],['√','√(','o'],['%','%','o'],['^','^','o'],['÷','÷','o'],['7'],['8'],['9'],['×','×','o'],['4'],['5'],['6'],['−','−','o'],['1'],['2'],['3'],['+','+','o'],['0','0','z'],['.'],['=','=','eq']].map(([l,v=l,c=''])=>`<button class="${c}" data-k="${v}">${l}</button>`).join('');
+$('keys').onclick=e=>{const k=e.target.dataset.k;if(!k)return;
+  if(k==='C'){cin.value='';$('cres').textContent='0';$('cerr').textContent=''}
+  else if(k==='DEL'){const a=cin.selectionStart??cin.value.length,b=cin.selectionEnd??a;if(a!==b)cin.setRangeText('',a,b,'end');else if(a>0)cin.setRangeText('',a-1,a,'end')}
+  else if(k==='=')evalCalc();
+  else{const a=cin.selectionStart??cin.value.length;cin.setRangeText(k,a,cin.selectionEnd??a,'end')}};
+cin.addEventListener('keydown',e=>{if(e.key==='Enter')evalCalc()});cin.addEventListener('input',()=>{$('cerr').textContent=''});
+
+/* ---------- Formula Library ---------- */
+$('flist').innerHTML=F.map((f,i)=>`<details class="card"${i?'':' open'}><summary>${f.n}</summary><div class="fx">${f.f.join('<br>')}</div><h4>Keterangan variabel</h4><ul>${f.v.map(x=>`<li>${x}</li>`).join('')}</ul><h4>Contoh soal</h4><p>${f.q}</p><h4>Penyelesaian</h4><ol>${f.s.map(x=>`<li>${x}</li>`).join('')}</ol></details>`).join('');
+
+/* ---------- Graph Plotter ---------- */
+const cv=$('cv'),ctx=cv.getContext('2d');let G={f:null,pts:[],px:null};
+const rd=x=>String(Number(x.toFixed(3)));
+function eq(t){let s='';t.forEach(([k,v])=>{if(k===0)return;const a=Math.abs(k),b=(a===1&&v)?v:rd(a)+v;if(!s)s=(k<0?'−':'')+b;else s+=(k<0?' − ':' + ')+b});return 'y = '+(s||'0')}
+$('gt').onchange=()=>{const q=$('gt').value==='q';$('gl').hidden=q;$('gq').hidden=!q};
+function gen(){
+  const q=$('gt').value==='q',v=(q?['qa','qb','qc']:['gm','gc']).map(i=>$(i).value.trim());
+  if(v.some(x=>x===''||!isFinite(+x))){$('gerr').textContent='Isi semua koefisien dengan angka yang valid.';return}
+  const k=v.map(Number);if(q&&k[0]===0){$('gerr').textContent='Koefisien a tidak boleh 0 pada fungsi kuadrat.';return}
+  $('gerr').textContent='';let pts=[],info=[],e;
+  if(q){const[a,b,c]=k,D=b*b-4*a*c,vx=-b/(2*a);G.f=x=>a*x*x+b*x+c;e=eq([[a,'x²'],[b,'x'],[c,'']]);
+    info=[`Puncak: (${rd(vx)}, ${rd(G.f(vx))})`,`Potong sumbu Y: (0, ${rd(c)})`];pts=[[vx,G.f(vx)],[0,c]];
+    if(D>=0){const s=Math.sqrt(D),x1=(-b+s)/(2*a),x2=(-b-s)/(2*a);info.push('Akar: x = '+(D===0?rd(x1):rd(x1)+' dan '+rd(x2)));pts.push([x1,0],[x2,0])}else info.push('Tidak ada akar real (D < 0)')}
+  else{const[m,c]=k;G.f=x=>m*x+c;e=eq([[m,'x'],[c,'']]);info=[`Gradien: ${rd(m)}`,`Potong sumbu Y: (0, ${rd(c)})`];pts=[[0,c]];
+    if(m!==0){info.push(`Potong sumbu X: (${rd(-c/m)}, 0)`);pts.push([-c/m,0])}else info.push('Garis horizontal')}
+  $('ginfo').innerHTML=[e,...info].map((t,i)=>`<span class="chip${i?'':' on'}">${t}</span>`).join('');
+  G.pts=pts;G.px=null;$('coord').textContent='Arahkan kursor / sentuh grafik untuk melihat koordinat.';draw()}
+const step=v=>{const p=10**Math.floor(Math.log10(v)),n=v/p;return(n<1.5?1:n<3.5?2:n<7.5?5:10)*p};
+function draw(){
+  if(!G.f||!$('graph').classList.contains('active'))return;
+  const w=cv.clientWidth,h=cv.clientHeight,d=window.devicePixelRatio||1;cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0);
+  const x0=-10,x1=10,N=Math.max(200,w),ys=[];for(let i=0;i<=N;i++)ys.push(G.f(x0+(x1-x0)*i/N));
+  let lo=Math.min(0,...ys),hi=Math.max(0,...ys);if(hi-lo<4){lo=Math.min(lo,-2);hi=Math.max(hi,2)}
+  const p=(hi-lo)*.08,y0=lo-p,y1=hi+p,X=x=>(x-x0)/(x1-x0)*w,Y=y=>h-(y-y0)/(y1-y0)*h,sx=2,sy=step((y1-y0)/8);
+  ctx.clearRect(0,0,w,h);ctx.font='11px system-ui';ctx.lineWidth=1;
+  for(let k=Math.ceil(x0/sx);k<=Math.floor(x1/sx);k++){const x=k*sx;ctx.strokeStyle='rgba(255,255,255,.07)';ctx.beginPath();ctx.moveTo(X(x),0);ctx.lineTo(X(x),h);ctx.stroke();if(k){ctx.fillStyle='#8d97b5';ctx.fillText(rd(x),X(x)+3,Math.min(Y(0)+13,h-4))}}
+  for(let k=Math.ceil(y0/sy);k<=Math.floor(y1/sy);k++){const y=k*sy;ctx.strokeStyle='rgba(255,255,255,.07)';ctx.beginPath();ctx.moveTo(0,Y(y));ctx.lineTo(w,Y(y));ctx.stroke();if(k){ctx.fillStyle='#8d97b5';ctx.fillText(rd(y),Math.min(X(0)+4,w-34),Y(y)-3)}}
+  ctx.strokeStyle='#a5b4fc';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(0),0);ctx.lineTo(X(0),h);ctx.moveTo(0,Y(0));ctx.lineTo(w,Y(0));ctx.stroke();
+  ctx.fillStyle='#a5b4fc';ctx.fillText('x',w-12,Y(0)-6);ctx.fillText('y',X(0)+6,12);ctx.fillText('0',X(0)+4,Math.min(Y(0)+13,h-4));
+  ctx.strokeStyle='#7aa2ff';ctx.lineWidth=2.5;ctx.shadowColor='#6d8cff';ctx.shadowBlur=10;ctx.beginPath();
+  ys.forEach((y,i)=>{const px=X(x0+(x1-x0)*i/N);i?ctx.lineTo(px,Y(y)):ctx.moveTo(px,Y(y))});ctx.stroke();ctx.shadowBlur=0;
+  G.pts.forEach(([x,y])=>{if(x<x0||x>x1||y<y0||y>y1)return;ctx.fillStyle='#c084fc';ctx.beginPath();ctx.arc(X(x),Y(y),4.5,0,7);ctx.fill()});
+  if(G.px!==null){const x=G.px,y=G.f(x);ctx.fillStyle='#fff';ctx.strokeStyle='#3d7bff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(X(x),Y(y),6,0,7);ctx.fill();ctx.stroke()}}
+function ptr(e){if(!G.f)return;const r=cv.getBoundingClientRect(),x=-10+20*Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));G.px=x;$('coord').textContent=`Koordinat: (x, y) = (${rd(x)}, ${rd(G.f(x))})`;draw()}
+cv.addEventListener('pointermove',ptr);cv.addEventListener('pointerdown',ptr);$('gb').onclick=gen;window.addEventListener('resize',draw);gen();
+
+/* ---------- Math Challenge ---------- */
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,pick=a=>a[rnd(0,a.length-1)],r2=x=>Math.round(x*100)/100,n=x=>String(r2(x));
+const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+function nopts(a,u=''){const s=new Set([n(a)+u]),sp=Math.max(1,Math.round(Math.abs(a)/10));let t=0;while(s.size<4&&t++<80){const c=a+(Math.random()<.5?-1:1)*rnd(1,4)*sp;if(a>=0&&c<0)continue;s.add(n(c)+u)}return shuf([...s])}
+const N1=(q,a,e,u='')=>({q,ans:n(a)+u,opts:nopts(a,u),e});
+const gcd=(a,b)=>b?gcd(b,a%b):a,fr=(a,b)=>{const g=gcd(a,b);return b/g===1?String(a/g):`${a/g}/${b/g}`};
+function F1(q,a,b,e){const ans=fr(a,b),s=new Set([ans]);[[b-a,b],[a+1,b],[a-1,b],[a,b+1],[b,a+b],[a+2,b+1]].forEach(([x,y])=>{if(x>0&&x<y&&s.size<4)s.add(fr(x,y))});let t=0;while(s.size<4&&t++<50){const y=rnd(4,40);s.add(fr(rnd(1,y-1),y))}
+  return{q,ans,opts:shuf([...s]),e:e+(gcd(a,b)>1?`\nDisederhanakan: ${a}/${b} = ${ans}`:'')}}
+const X=(eq,e,x)=>N1('Tentukan nilai x: '+eq,x,e);
+const TR=[[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29]];
+const DICE=[['genap',[2,4,6]],['ganjil',[1,3,5]],['lebih dari 4',[5,6]],['kurang dari 3',[1,2]],['prima',[2,3,5]],['kelipatan 3',[3,6]],['kurang dari atau sama dengan 4',[1,2,3,4]]];
+const dice=()=>{const[d,o]=pick(DICE);return F1(`Sebuah dadu bersisi 6 dilempar sekali. Peluang muncul mata dadu ${d} = ?`,o.length,6,`Mata dadu ${d}: ${o.join(', ')} → ${o.length} kejadian dari 6 kemungkinan.\nP = ${o.length}/6`)};
+const L={
+ar:[[()=>{const a=rnd(5,60),b=rnd(5,60);return N1(`${a} + ${b} = ?`,a+b,`${a} + ${b} = ${a+b}`)},
+    ()=>{const b=rnd(3,40),a=b+rnd(5,40);return N1(`${a} − ${b} = ?`,a-b,`${a} − ${b} = ${a-b}`)},
+    ()=>{const a=rnd(2,12),b=rnd(2,12);return N1(`${a} × ${b} = ?`,a*b,`${a} × ${b} = ${a*b}`)}],
+   [()=>{const a=rnd(2,20),b=rnd(2,20),c=rnd(2,9);return N1(`(${a} + ${b}) × ${c} = ?`,(a+b)*c,`(${a} + ${b}) = ${a+b}\n${a+b} × ${c} = ${(a+b)*c}`)},
+    ()=>{const b=rnd(3,12),r=rnd(6,25);return N1(`${b*r} ÷ ${b} = ?`,r,`${b*r} ÷ ${b} = ${r}`)},
+    ()=>{const p=pick([10,20,25,50,15]),k=rnd(2,20),v=20*k;return N1(`${p}% dari ${v} = ?`,p*v/100,`${p}% dari ${v} = ${p}/100 × ${v} = ${p*v/100}`)}],
+   [()=>{const a=rnd(12,30),b=rnd(12,30),c=rnd(5,15),d=rnd(5,15);return N1(`${a} × ${b} + ${c} × ${d} = ?`,a*b+c*d,`${a} × ${b} = ${a*b}\n${c} × ${d} = ${c*d}\nJumlah = ${a*b} + ${c*d} = ${a*b+c*d}`)},
+    ()=>{const p=pick([15,35,45,65,85]),v=20*rnd(5,25);return N1(`${p}% dari ${v} = ?`,p*v/100,`${p}% dari ${v} = ${p}/100 × ${v} = ${p*v/100}`)},
+    ()=>{const a=rnd(15,30),b=rnd(5,14);return N1(`${a}² − ${b}² = ?`,a*a-b*b,`${a}² = ${a*a}\n${b}² = ${b*b}\nSelisih = ${a*a} − ${b*b} = ${a*a-b*b}`)}]],
+al:[[()=>{const x=rnd(2,20),a=rnd(2,20);return X(`x + ${a} = ${x+a}`,`x = ${x+a} − ${a} = ${x}`,x)},
+    ()=>{const a=rnd(2,9),x=rnd(2,12);return X(`${a}x = ${a*x}`,`x = ${a*x} ÷ ${a} = ${x}`,x)}],
+   [()=>{const a=rnd(2,9),x=rnd(2,12),b=rnd(1,20),c=a*x+b;return X(`${a}x + ${b} = ${c}`,`${a}x = ${c} − ${b} = ${c-b}\nx = ${c-b} ÷ ${a} = ${x}`,x)},
+    ()=>{const a=rnd(2,9),x=rnd(3,12),b=rnd(1,5),c=a*x-b;return X(`${a}x − ${b} = ${c}`,`${a}x = ${c} + ${b} = ${c+b}\nx = ${c+b} ÷ ${a} = ${x}`,x)}],
+   [()=>{const x=rnd(2,10),a=rnd(4,12),c=rnd(1,a-1),b=rnd(1,20),d=(a-c)*x+b;return X(`${a}x + ${b} = ${c}x + ${d}`,`${a}x − ${c}x = ${d} − ${b}\n${a-c}x = ${d-b}\nx = ${d-b} ÷ ${a-c} = ${x}`,x)},
+    ()=>{const a=rnd(2,6),b=rnd(1,8),x=rnd(1,12),c=a*(x-b);return X(`${a}(x − ${b}) = ${c}`,`x − ${b} = ${c} ÷ ${a} = ${x-b}\nx = ${x-b} + ${b} = ${x}`,x)}]],
+ge:[[()=>{const p=rnd(3,15),l=rnd(3,15);return N1(`Persegi panjang berukuran ${p} cm × ${l} cm. Luasnya = ?`,p*l,`L = p × l = ${p} × ${l} = ${p*l} cm²`,' cm²')},
+    ()=>{const s=rnd(3,20);return N1(`Keliling persegi dengan sisi ${s} cm = ?`,4*s,`K = 4 × s = 4 × ${s} = ${4*s} cm`,' cm')}],
+   [()=>{const r=rnd(3,10);return N1(`Luas lingkaran berjari-jari ${r} cm (π = 3.14) = ?`,3.14*r*r,`L = π × r² = 3.14 × ${r}² = 3.14 × ${r*r} = ${n(3.14*r*r)} cm²`,' cm²')},
+    ()=>{const r=rnd(3,12);return N1(`Keliling lingkaran berjari-jari ${r} cm (π = 3.14) = ?`,6.28*r,`K = 2 × π × r = 2 × 3.14 × ${r} = ${n(6.28*r)} cm`,' cm')},
+    ()=>{const a=2*rnd(2,10),t=rnd(3,12);return N1(`Luas segitiga dengan alas ${a} cm dan tinggi ${t} cm = ?`,a*t/2,`L = ½ × a × t = ½ × ${a} × ${t} = ${a*t/2} cm²`,' cm²')}],
+   [()=>{const p=rnd(4,12),l=rnd(3,9),t=rnd(2,8);return N1(`Volume balok ${p} cm × ${l} cm × ${t} cm = ?`,p*l*t,`V = p × l × t = ${p} × ${l} × ${t} = ${p*l*t} cm³`,' cm³')},
+    ()=>{const s=rnd(3,12);return N1(`Luas permukaan kubus dengan rusuk ${s} cm = ?`,6*s*s,`L = 6 × s² = 6 × ${s}² = 6 × ${s*s} = ${6*s*s} cm²`,' cm²')},
+    ()=>{const r=7*rnd(1,3);return N1(`Luas lingkaran berjari-jari ${r} cm (π = 22/7) = ?`,22*r*r/7,`L = π × r² = 22/7 × ${r}² = 22/7 × ${r*r} = ${22*r*r/7} cm²`,' cm²')},
+    ()=>{const a=rnd(3,15),b=rnd(3,15),t=2*rnd(2,8);return N1(`Trapesium dengan sisi sejajar ${a} cm dan ${b} cm, tinggi ${t} cm. Luasnya = ?`,(a+b)*t/2,`L = ½ × (a + b) × t = ½ × (${a} + ${b}) × ${t} = ½ × ${a+b} × ${t} = ${(a+b)*t/2} cm²`,' cm²')}]],
+py:[[()=>{const[a,b,c]=pick(TR.slice(0,2)).map(v=>v*rnd(1,3));return N1(`Segitiga siku-siku memiliki sisi siku-siku ${a} cm dan ${b} cm. Panjang sisi miringnya = ?`,c,`c² = a² + b² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${a*a+b*b}\nc = √${a*a+b*b} = ${c} cm`,' cm')}],
+   [()=>{const[a,b,c]=pick(TR.slice(0,4)).map(v=>v*rnd(1,2)),sw=Math.random()<.5,[g,m]=sw?[a,b]:[b,a];return N1(`Sisi miring segitiga siku-siku ${c} cm dan salah satu sisi siku-sikunya ${g} cm. Panjang sisi siku-siku yang lain = ?`,m,`Sisi lain² = c² − ${g}² = ${c*c} − ${g*g} = ${c*c-g*g}\nSisi lain = √${c*c-g*g} = ${m} cm`,' cm')}],
+   [()=>{const[a,b,c]=pick(TR).map(v=>v*rnd(1,2));return N1(`Sebuah tangga bersandar pada dinding. Ujung bawah berjarak ${a} m dari dinding dan ujung atas mencapai ketinggian ${b} m. Panjang tangga = ?`,c,`c² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${a*a+b*b}\nc = √${a*a+b*b} = ${c} m`,' m')},
+    ()=>{const[a,b,c]=pick(TR).map(v=>v*rnd(1,2));return N1(`Tangga sepanjang ${c} m bersandar pada dinding dengan ujung atas mencapai ketinggian ${b} m. Jarak ujung bawah tangga dari dinding = ?`,a,`Jarak² = ${c}² − ${b}² = ${c*c} − ${b*b} = ${c*c-b*b}\nJarak = √${c*c-b*b} = ${a} m`,' m')}]],
+pr:[[()=>{const r=rnd(2,9),b=rnd(2,9);return F1(`Sebuah kantong berisi ${r} bola merah dan ${b} bola biru. Satu bola diambil acak. Peluang terambil bola merah = ?`,r,r+b,`P(merah) = bola merah ÷ total bola = ${r}/${r+b}`)},dice],
+   [dice,()=>{const[d,k]=pick([['hati',13],['As',4],['wajik',13],['bergambar (J, Q, K)',12],['berwarna merah',26],['sekop',13]]);return F1(`Satu kartu diambil acak dari satu set kartu bridge (52 kartu). Peluang terambil kartu ${d} = ?`,k,52,`Ada ${k} kartu ${d} dari 52 kartu.\nP = ${k}/52`)},
+    ()=>{const[d,k,o]=pick([['dua-duanya Angka',1,'AA'],['tepat satu Angka',2,'AG, GA'],['paling sedikit satu Angka',3,'AA, AG, GA'],['dua-duanya Gambar',1,'GG']]);return F1(`Dua koin dilempar bersamaan. Peluang muncul ${d} = ?`,k,4,`Ruang sampel: AA, AG, GA, GG (4 hasil).\n${d}: ${o} → ${k} hasil.\nP = ${k}/4`)}],
+   [()=>{const s=rnd(3,11),p=[];for(let i=1;i<=6;i++)for(let j=1;j<=6;j++)if(i+j===s)p.push(`(${i},${j})`);return F1(`Dua dadu dilempar bersamaan. Peluang jumlah kedua mata dadu = ${s} adalah ?`,p.length,36,`Ruang sampel = 6 × 6 = 36.\nPasangan berjumlah ${s}: ${p.join(' ')}\nBanyaknya = ${p.length}\nP = ${p.length}/36`)},
+    ()=>{const r=rnd(3,6),b=rnd(3,6),t=r+b;return F1(`Kantong berisi ${r} bola merah dan ${b} bola biru. Dua bola diambil berturut-turut tanpa pengembalian. Peluang keduanya merah = ?`,r*(r-1),t*(t-1),`P = ${r}/${t} × ${r-1}/${t-1} = ${r*(r-1)}/${t*(t-1)}`)}]]};
+const CATS=[['ar','Arithmetic'],['al','Algebra'],['ge','Geometry'],['py','Pythagoras'],['pr','Probability']],DF=['Easy','Medium','Hard'],PT=[10,15,20],NQ=10;
+let qc='ar',qd=0,Q=[],qi=0,sc=0,ok=0,done=false;
+function chips(){$('qcats').innerHTML=CATS.map(([k,l])=>`<button class="chip${k===qc?' on':''}" data-c="${k}">${l}</button>`).join('');$('qdiffs').innerHTML=DF.map((l,i)=>`<button class="chip${i===qd?' on':''}" data-d="${i}">${l}</button>`).join('')}
+$('qsetup').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.c)qc=b.dataset.c;if(b.dataset.d)qd=+b.dataset.d;if(b.dataset.c||b.dataset.d)chips()});chips();
+const qshow=id=>['qsetup','qplay','qres'].forEach(i=>$(i).hidden=i!==id);
+function start(){Q=[];let t=0;while(Q.length<NQ&&t++<300){const x=pick(L[qc][qd])();if(!Q.some(y=>y.q===x.q))Q.push(x)}qi=0;sc=0;ok=0;qshow('qplay');ask()}
+function ask(){done=false;const x=Q[qi];$('qn').textContent=`Soal ${qi+1}/${NQ}`;$('qs').textContent='Skor: '+sc;$('qbar').style.width=(qi/NQ*100)+'%';$('qt').textContent=x.q;$('qo').innerHTML='';
+  x.opts.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=()=>answer(b,o);$('qo').append(b)});$('qfb').hidden=true;$('qnext').hidden=true}
+function answer(b,o){if(done)return;done=true;const x=Q[qi],good=o===x.ans;
+  [...$('qo').children].forEach(c=>{c.disabled=true;if(c.textContent===x.ans)c.classList.add('good')});if(!good)b.classList.add('bad');
+  st.a++;if(good){sc+=PT[qd];ok++;st.c++}save();$('qs').textContent='Skor: '+sc;$('qbar').style.width=((qi+1)/NQ*100)+'%';
+  $('qfb').hidden=false;$('qfb').className='fb '+(good?'g':'b');$('qv').textContent=good?`✓ Benar! +${PT[qd]} poin`:`✗ Kurang tepat. Jawaban benar: ${x.ans}`;$('qe').textContent='Pembahasan:\n'+x.e;
+  $('qnext').hidden=false;$('qnext').textContent=qi===NQ-1?'Lihat Hasil':'Soal Berikutnya'}
+$('qnext').onclick=()=>{if(++qi<NQ)return ask();const acc=Math.round(ok/NQ*100);qshow('qres');$('rs').textContent=`${sc} / ${NQ*PT[qd]}`;$('rd').textContent=`${ok} dari ${NQ} benar (${acc}%) — ${CATS.find(c=>c[0]===qc)[1]}, ${DF[qd]}`;$('rm').textContent=acc>=90?'Luar biasa! 🎉':acc>=70?'Bagus sekali!':acc>=50?'Cukup baik, terus berlatih!':'Ayo coba lagi, pasti bisa!'};
+$('qstart').onclick=start;$('rr').onclick=start;$('rc').onclick=()=>qshow('qsetup');
+</script>
+</body>
+</html>
